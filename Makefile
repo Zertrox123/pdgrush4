@@ -12,7 +12,10 @@ SRC = src/main.cpp \
 	  src/Modules/Kernel.cpp \
 	  src/Modules/Temp.cpp \
 	  src/Modules/Cpu.cpp \
-	  src/Modules/Users.cpp
+	  src/Modules/Users.cpp \
+      src/Modules/Date.cpp \
+      src/Modules/Network.cpp \
+      src/Modules/Ram.cpp
 
 OBJ = $(SRC:.cpp=.o)
 CXXFLAGS = -g3 -std=c++20 -Wall -Wextra -Werror -lsfml-graphics -lsfml-window -lsfml-system -lncurses -I./src

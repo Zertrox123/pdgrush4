@@ -5,6 +5,9 @@
 #include "Modules/Temp.hpp"
 #include "Modules/Cpu.hpp"
 #include "Modules/Users.hpp"
+#include "Modules/Date.hpp"
+#include "Modules/Network.hpp"
+#include "Modules/Ram.hpp"
 
 bool Display::Sfml::init() {
     window = new sf::RenderWindow();
@@ -95,6 +98,9 @@ void Display::Sfml::refresh()
     Temp temperature;
     Users usrs;
     Cpu cpu;
+    Date date;
+    Network network;
+    Ram ram;
 
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
@@ -123,6 +129,9 @@ void Display::Sfml::refresh()
         temperature.Draw(this);
         cpu.Draw(this);
         usrs.Draw(this); 
+        date.Draw(this);
+        network.Draw(this);
+        ram.Draw(this);
         window->display();
         window->setView(window->getDefaultView());
     }
