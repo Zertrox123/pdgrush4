@@ -94,10 +94,11 @@ void Display::Sfml::refresh()
                 this->scrolloffset = this->scrolloffset - (data->delta * 45.0f);
                 if (this->scrolloffset < 0.0f)
                     this->scrolloffset = 0.0f;
-                if (this->scrolloffset > maxscrolling)
-                    this->scrolloffset = maxscrolling;
+                //std::cout << this->scrolloffset << std::endl;
                 if (maxscrolling < 0.0f)
                     maxscrolling = 0.0f;
+                if (this->scrolloffset > maxscrolling)
+                    this->scrolloffset = maxscrolling;
             }
             if (event->is<sf::Event::Closed>())
                 window->close();
