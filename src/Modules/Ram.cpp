@@ -39,7 +39,8 @@ void Ram::Draw(Krell::IDisplay *ui) {
     }
     double used = (total - free - buffers - cached);
     std::ostringstream ostream;
-    ostream << "Current usage: " << used / 1024 << "MB / " << total / 1024 << " MB";
+    ostream << "Current usage (mb): " << used / 1024 << "MB / " << total / 1024 << " MB";
+    // TODO: do gb
     _name = ostream.str();
     ui->NewSection("ram");
     ui->drawText(_name);

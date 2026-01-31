@@ -8,6 +8,8 @@
 #include "Modules/Date.hpp"
 #include "Modules/Network.hpp"
 #include "Modules/Ram.hpp"
+#include "Modules/Disk.hpp"
+#include "Modules/Battery.hpp"
 
 bool Display::Sfml::init() {
     window = new sf::RenderWindow();
@@ -101,6 +103,8 @@ void Display::Sfml::refresh()
     Date date;
     Network network;
     Ram ram;
+    Disk disk;
+    Battery battery;
 
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
@@ -132,6 +136,8 @@ void Display::Sfml::refresh()
         date.Draw(this);
         network.Draw(this);
         ram.Draw(this);
+        disk.Draw(this);
+        battery.Draw(this);
         window->display();
         window->setView(window->getDefaultView());
     }
