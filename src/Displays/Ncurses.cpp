@@ -14,6 +14,8 @@ bool Display::Ncurses::init() {
 
 Display::Ncurses::~Ncurses() {
     clear();
+    ::refresh();
+    clear();
     endwin();
     exit_curses(0);
 }

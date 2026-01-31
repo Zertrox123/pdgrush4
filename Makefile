@@ -9,7 +9,8 @@ SRC = src/main.cpp \
       src/Displays/Ncurses.cpp \
       src/Displays/Sfml.cpp \
 	  src/Modules/Hostname.cpp \
-	  src/Modules/Kernel.cpp
+	  src/Modules/Kernel.cpp \
+	  src/Modules/Temp.cpp
 
 OBJ = $(SRC:.cpp=.o)
 CXXFLAGS = -g3 -std=c++20 -Wall -Wextra -Werror -lsfml-graphics -lsfml-window -lsfml-system -lncurses -I./src

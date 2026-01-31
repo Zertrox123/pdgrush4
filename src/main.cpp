@@ -4,6 +4,7 @@
 #include "Displays/Sfml.hpp"
 #include "Modules/Hostname.hpp"
 #include "Modules/Kernel.hpp"
+#include "Modules/Temp.hpp"
 
 int main(int argc, char **argv){
     if (argc > 1 && (std::string(argv[1]) == "-gui")) {   
@@ -15,20 +16,17 @@ int main(int argc, char **argv){
         a->init();
         Hostname hm;
         Kernel hm2;
+        Temp tp;
         while (1) {
             a->refresh();
             hm.Draw(a);
             hm2.Draw(a);
-            for (int i = 0; i < 10; i++) {
-                Hostname q;
-                q.Draw(a);
-                Kernel c;
-                c.Draw(a);
-            }
+            tp.Draw(a);
             int c = getch();
             if (c == 'q') break;
             if (c == KEY_DOWN) a->setscroll(-5);
             if (c == KEY_UP) a->setscroll(5);
         }
+        delete a;
     }
 }
