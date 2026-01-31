@@ -3,7 +3,7 @@
 
 bool Display::Sfml::init() {
     auto window = new sf::RenderWindow();
-    window->create(sf::VideoMode(sf::Vector2u{1280, 720}), "sfml", sf::Style::Titlebar | sf::Style::Close);
+    window->create(sf::VideoMode(sf::Vector2u{1280, 720}), "myGKrellm", sf::Style::Titlebar | sf::Style::Close);
     return true;
 };
 
