@@ -18,12 +18,12 @@ void Ram::Draw(Krell::IDisplay *ui) {
         return;
     }
     std::string line;
-    long total = 0;
-    long free = 0;
-    long buffers = 0;
-    long cached = 0;
+    double total = 0;
+    double free = 0;
+    double buffers = 0;
+    double cached = 0;
     while (std::getline(stream, line)) {
-        long fetched = 0;
+        double fetched = 0;
         std::istringstream istream(line);
         std::string key;
         std::string unit;
@@ -37,7 +37,7 @@ void Ram::Draw(Krell::IDisplay *ui) {
         else if (key == "Cached:")
             cached = fetched;
     }
-    long used = (total - free - buffers - cached);
+    double used = (total - free - buffers - cached);
     std::ostringstream ostream;
     ostream << "Current usage: " << used / 1024 << "MB / " << total / 1024 << " MB";
     _name = ostream.str();
