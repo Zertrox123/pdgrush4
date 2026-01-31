@@ -13,7 +13,11 @@ private:
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         return w.ws_col;
     };
-    WINDOW *actual_win;
+    WINDOW *actual_win = nullptr;
+    int winh = 1;
+    int winw = 1;
+    int padding = 0;
+    int staticpadding = 0;
 
 public:
         ~Ncurses() override;
@@ -22,5 +26,6 @@ public:
         void NewSection(std::string Name) override;
         bool drawText(std::string text) override;
         void refresh() override;
+        void setscroll(int value);
     };
 }

@@ -6,30 +6,46 @@ bool Display::Ncurses::init() {
 	cbreak();
     noecho();
     keypad(stdscr, TRUE);
+    curs_set(0);
+    timeout(1);
 
     return true;
 };
 
 Display::Ncurses::~Ncurses() {
+    clear();
     endwin();
+    exit_curses(0);
 }
 
 void Display::Ncurses::NewSection(std::string Name) {
-    WINDOW *win = newwin(10, getWindowSize(), 0, 0);
+    if (actual_win != nullptr) {
+        delwin(actual_win);
+    }
+
+    winh = 5;
+    winw = getWindowSize();
+    WINDOW *win = newwin(5, winw, staticpadding + padding, 0);
     box(win, 0, 0);
     mvwprintw(win, 0, 2, Name.c_str());
-
-    mvwprintw(actual_win, 2, 2, "test");
-    wrefresh(win);
     actual_win = win;
+    wrefresh(actual_win);
+    padding += winh;
 };
 
 bool Display::Ncurses::drawText(std::string text) {
-    mvwprintw(actual_win, 2, 2, text.c_str());
+    mvwprintw(actual_win, winh / 2, winw / 2 - (text.length() / 2), text.c_str());
+    wrefresh(actual_win);
     return true;
 };
 
 void Display::Ncurses::refresh() {
-    if (stdscr == NULL) return;
-    ::refresh();
+    padding = 0;
+    wrefresh(actual_win);
 };
+
+void Display::Ncurses::setscroll(int value) {
+    staticpadding += value;
+    if (staticpadding > 0)
+        staticpadding = 0;
+}
