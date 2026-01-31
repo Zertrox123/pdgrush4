@@ -1,4 +1,6 @@
+#include <sstream>
 #include <ncurses.h>
+#include <vector>
 #include "Ncurses.hpp"
 
 bool Display::Ncurses::init() {
@@ -7,7 +9,7 @@ bool Display::Ncurses::init() {
     noecho();
     keypad(stdscr, TRUE);
     curs_set(0);
-    timeout(1);
+    timeout(1000);
 
     return true;
 };
@@ -25,9 +27,9 @@ void Display::Ncurses::NewSection(std::string Name) {
         delwin(actual_win);
     }
 
-    winh = 5;
+    winh = 7;
     winw = getWindowSize();
-    WINDOW *win = newwin(5, winw, staticpadding + padding, 0);
+    WINDOW *win = newwin(winh, winw, staticpadding + padding, 0);
     box(win, 0, 0);
     mvwprintw(win, 0, 2, Name.c_str());
     actual_win = win;
@@ -36,7 +38,23 @@ void Display::Ncurses::NewSection(std::string Name) {
 };
 
 bool Display::Ncurses::drawText(std::string text) {
-    mvwprintw(actual_win, winh / 2, winw / 2 - (text.length() / 2), text.c_str());
+        std::vector<std::string> lines;
+    std::stringstream ss(text);
+    std::string line;
+    
+    while (std::getline(ss, line, '\n')) {
+        lines.push_back(line);
+    }
+    
+    // Center the block of lines vertically
+    int start_y = winh / 2 - (lines.size() / 2);
+    
+    // Draw each line centered horizontally
+    for (size_t i = 0; i < lines.size(); i++) {
+        int x = winw / 2 - (lines[i].length() / 2);
+        mvwprintw(actual_win, start_y + i, x, lines[i].c_str());
+    }
+    
     wrefresh(actual_win);
     return true;
 };

@@ -2,9 +2,11 @@
 #include <ncurses.h>
 #include "Displays/Ncurses.hpp"
 #include "Displays/Sfml.hpp"
+#include "Modules/Cpu.hpp"
 #include "Modules/Hostname.hpp"
 #include "Modules/Kernel.hpp"
 #include "Modules/Temp.hpp"
+#include "Modules/Users.hpp"
 
 int main(int argc, char **argv){
     if (argc > 1 && (std::string(argv[1]) == "-gui")) {   
@@ -17,11 +19,15 @@ int main(int argc, char **argv){
         Hostname hm;
         Kernel hm2;
         Temp tp;
+        Cpu cpu;
+        Users usr;
         while (1) {
             a->refresh();
             hm.Draw(a);
             hm2.Draw(a);
             tp.Draw(a);
+            cpu.Draw(a);
+            usr.Draw(a);
             int c = getch();
             if (c == 'q') break;
             if (c == KEY_DOWN) a->setscroll(-5);
