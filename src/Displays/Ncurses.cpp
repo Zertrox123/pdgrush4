@@ -30,3 +30,6 @@ bool Display::Ncurses::drawText(std::string text) {
     mvprintw(2, 2, text.c_str());
     return true;
 };
+
+void Display::Ncurses::refresh() {
+};

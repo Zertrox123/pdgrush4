@@ -11,5 +11,6 @@ public:
 
         virtual void NewSection(std::string Name) = 0;
         virtual bool drawText(std::string text) = 0;
+        virtual void refresh() = 0;
     };
 }

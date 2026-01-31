@@ -1,5 +1,9 @@
 #pragma once
 
-class Hostname : Krell::IModule {
+#include "Displays/IDisplay.hpp"
+#include "Modules/IModule.hpp"
 
-}
+class Hostname : Krell::IModule {
+    public:
+        void Draw(Krell::IDisplay winapi);
+};

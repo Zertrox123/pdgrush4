@@ -19,5 +19,6 @@ public:
 
         void NewSection(std::string Name) override;
         bool drawText(std::string text) override;
+        void refresh() override;
     };
 }
