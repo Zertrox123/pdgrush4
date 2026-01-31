@@ -1,5 +1,6 @@
 #include <iostream>
 #include "Sfml.hpp"
+#include "Modules/Hostname.hpp"
 
 bool Display::Sfml::init() {
     window = new sf::RenderWindow();
@@ -37,13 +38,14 @@ bool Display::Sfml::drawText(std::string text) {
 
 void Display::Sfml::refresh()
 {
+    Hostname host;
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
             if (event->is<sf::Event::Closed>())
                 window->close();
         }
         window->clear();
-        this->drawText("hello bro");
+        host.Draw(this);
         window->display();
     }
 }
