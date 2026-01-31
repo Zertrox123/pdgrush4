@@ -10,6 +10,9 @@ namespace Display{
 private:
         sf::RenderWindow* window = nullptr;
         sf::Font* font = nullptr;
+        float lastsectionpos = 0;
+        float sectionheight = 0;
+        float cursor = 0;
 public:
         ~Sfml() override;
         bool init() override;
