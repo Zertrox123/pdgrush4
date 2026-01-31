@@ -6,9 +6,10 @@
 ##
 
 SRC = src/main.cpp \
-      src/Displays/Ncurses.cpp 
+      src/Displays/Ncurses.cpp \
+      src/Displays/Sfml.cpp
 OBJ = $(SRC:.cpp=.o)
-CXXFLAGS = -std=c++20 -Wall -Wextra -Werror -lncurses
+CXXFLAGS = -std=c++20 -Wall -Wextra -Werror -lsfml-graphics -lsfml-window -lsfml-system -lncurses
 NAME = myGKrellm
 CC = clang++
 
