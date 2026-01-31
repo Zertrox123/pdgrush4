@@ -1,11 +1,10 @@
-#include "ADisplay.hpp"
+#include "IDisplay.hpp"
 #include <string>
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-
 namespace Display{ 
-    class Ncurses: Krell::IDisplay {
+    class Ncurses: public Krell::IDisplay {
 private:
     int getWindowSize() {
         struct winsize w;
