@@ -9,6 +9,7 @@ namespace Display{
     class Sfml: public Krell::IDisplay {
 private:
         sf::RenderWindow* window = nullptr;
+        sf::Font* font = nullptr;
 public:
         ~Sfml() override;
         bool init() override;
