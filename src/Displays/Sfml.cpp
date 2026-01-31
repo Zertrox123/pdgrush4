@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Sfml.hpp"
 #include "Modules/Hostname.hpp"
+#include "Modules/Kernel.hpp"
 
 bool Display::Sfml::init() {
     window = new sf::RenderWindow();
@@ -77,7 +78,7 @@ bool Display::Sfml::drawText(std::string text)
     sftext.setCharacterSize(20);
     sftext.setFillColor(sf::Color::White);
     float width = sftext.getLocalBounds().size.x;
-    sftext.setPosition({(window->getSize().x - width) / 2.0f, this->cursor + 10.0f});
+    sftext.setPosition({(window->getSize().x - width) / 2.0f, this->cursor - 20.0f});
     window->draw(sftext);
     this->cursor = this->cursor + 25.0f;
     return true;
@@ -86,7 +87,8 @@ bool Display::Sfml::drawText(std::string text)
 void Display::Sfml::refresh()
 {
     Hostname host;
-    
+    Kernel kernel;    
+
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
             if (auto *data = event->getIf<sf::Event::MouseWheelScrolled>()) {
@@ -109,8 +111,8 @@ void Display::Sfml::refresh()
         window->clear();
         view->setCenter(sf::Vector2f(window->getSize().x / 2.0f, window->getSize().y / 2.0f + this->scrolloffset));
         window->setView(*view);
-        for (int i = 0; i < 30; i++)
-            host.Draw(this);
+        host.Draw(this);
+        kernel.Draw(this);
         window->display();
         window->setView(window->getDefaultView());
     }
