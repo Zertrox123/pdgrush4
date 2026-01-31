@@ -2,7 +2,7 @@
 #include "Sfml.hpp"
 
 bool Display::Sfml::init() {
-    auto window = new sf::RenderWindow();
+    window = new sf::RenderWindow();
     window->create(sf::VideoMode(sf::Vector2u{1280, 720}), "myGKrellm", sf::Style::Titlebar | sf::Style::Close);
     return true;
 };
@@ -19,3 +19,15 @@ bool Display::Sfml::drawText(std::string text) {
     std::cout << text << std::endl;
     return true;
 };
+
+void Display::Sfml::refresh()
+{
+    while (window->isOpen()) {
+        while (auto event = window->pollEvent()) {
+            if (event->is<sf::Event::Closed>())
+                window->close();
+        }
+    }
+    window->clear();
+    window->display();
+}
