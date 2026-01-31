@@ -1,3 +1,4 @@
+#pragma once
 #include "IDisplay.hpp"
 #include <string>
 #include <sys/ioctl.h>
