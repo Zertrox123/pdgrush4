@@ -20,6 +20,7 @@ Cpu::Cpu() : _prevIdle(0), _prevTotal(0) {
 }
 
 void Cpu::Draw(Krell::IDisplay *ui) {
+    ui->NewSection("cpu");
     std::ifstream statfile("/proc/stat");
     std::string line;
     getline(statfile, line);

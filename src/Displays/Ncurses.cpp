@@ -38,7 +38,7 @@ void Display::Ncurses::NewSection(std::string Name) {
 };
 
 bool Display::Ncurses::drawText(std::string text) {
-        std::vector<std::string> lines;
+    std::vector<std::string> lines;
     std::stringstream ss(text);
     std::string line;
     
@@ -46,10 +46,8 @@ bool Display::Ncurses::drawText(std::string text) {
         lines.push_back(line);
     }
     
-    // Center the block of lines vertically
     int start_y = winh / 2 - (lines.size() / 2);
     
-    // Draw each line centered horizontally
     for (size_t i = 0; i < lines.size(); i++) {
         int x = winw / 2 - (lines[i].length() / 2);
         mvwprintw(actual_win, start_y + i, x, lines[i].c_str());
