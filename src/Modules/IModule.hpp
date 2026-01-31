@@ -8,6 +8,6 @@ private:
     std::string _name;
 public:
     virtual ~IModule() {};
-    virtual void Draw(IDisplay winapi) = 0;
+    virtual void Draw(IDisplay *winapi) = 0;
     };
 }

@@ -2,8 +2,12 @@
 
 #include "Displays/IDisplay.hpp"
 #include "Modules/IModule.hpp"
+#include <string>
 
 class Hostname : Krell::IModule {
+    private:
+        std::string _name;
     public:
-        void Draw(Krell::IDisplay winapi);
+        Hostname();
+        void Draw(Krell::IDisplay *winapi);
 };

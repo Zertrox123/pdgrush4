@@ -19,17 +19,17 @@ void Display::Ncurses::NewSection(std::string Name) {
     box(win, 0, 0);
     mvwprintw(win, 0, 2, Name.c_str());
 
-
-    mvwprintw(win, 2, 2, "Content inside the box");
-
-    refresh();
+    mvwprintw(actual_win, 2, 2, "test");
     wrefresh(win);
+    actual_win = win;
 };
 
 bool Display::Ncurses::drawText(std::string text) {
-    mvprintw(2, 2, text.c_str());
+    mvwprintw(actual_win, 2, 2, text.c_str());
     return true;
 };
 
 void Display::Ncurses::refresh() {
+    if (stdscr == NULL) return;
+    ::refresh();
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include "IDisplay.hpp"
+#include <ncurses.h>
 #include <string>
 #include <sys/ioctl.h>
 #include <unistd.h>
@@ -12,6 +13,7 @@ private:
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         return w.ws_col;
     };
+    WINDOW *actual_win;
 
 public:
         ~Ncurses() override;
