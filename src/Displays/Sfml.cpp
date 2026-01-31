@@ -2,6 +2,7 @@
 #include "Sfml.hpp"
 #include "Modules/Hostname.hpp"
 #include "Modules/Kernel.hpp"
+#include "Modules/Temp.hpp"
 
 bool Display::Sfml::init() {
     window = new sf::RenderWindow();
@@ -13,6 +14,7 @@ bool Display::Sfml::init() {
         exit(1);
     }
     window->create(sf::VideoMode(sf::Vector2u{700, 800}), "myGKrellm", sf::Style::Titlebar | sf::Style::Close);
+    window->setFramerateLimit(60);
     view = new sf::View(sf::FloatRect(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y))));
     return true;
 };
@@ -88,6 +90,7 @@ void Display::Sfml::refresh()
 {
     Hostname host;
     Kernel kernel;    
+    Temp temperature;
 
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
@@ -113,6 +116,7 @@ void Display::Sfml::refresh()
         window->setView(*view);
         host.Draw(this);
         kernel.Draw(this);
+        temperature.Draw(this);
         window->display();
         window->setView(window->getDefaultView());
     }
