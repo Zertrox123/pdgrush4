@@ -12,12 +12,14 @@ bool Display::Sfml::init() {
         exit(1);
     }
     window->create(sf::VideoMode(sf::Vector2u{700, 800}), "myGKrellm", sf::Style::Titlebar | sf::Style::Close);
+    view = new sf::View(sf::FloatRect(sf::Vector2f(0.0f, 0.0f), sf::Vector2f(static_cast<float>(window->getSize().x), static_cast<float>(window->getSize().y))));
     return true;
 };
 
 Display::Sfml::~Sfml() {
     delete window;
     delete font;
+    delete view;
 }
 
 void Display::Sfml::NewSection(std::string name)
@@ -64,6 +66,8 @@ void Display::Sfml::NewSection(std::string name)
     window->draw(downline);
     
     window->draw(title);
+    this->currentcontent = this->lastsectionpos + this->sectionheight + 20.0f;
+    return;
 }
 
 bool Display::Sfml::drawText(std::string text)
@@ -82,8 +86,19 @@ bool Display::Sfml::drawText(std::string text)
 void Display::Sfml::refresh()
 {
     Hostname host;
+    
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
+            if (auto *data = event->getIf<sf::Event::MouseWheelScrolled>()) {
+                float maxscrolling = this->currentcontent - window->getSize().y;
+                this->scrolloffset = this->scrolloffset - (data->delta * 45.0f);
+                if (this->scrolloffset < 0.0f)
+                    this->scrolloffset = 0.0f;
+                if (this->scrolloffset > maxscrolling)
+                    this->scrolloffset = maxscrolling;
+                if (maxscrolling < 0.0f)
+                    maxscrolling = 0.0f;
+            }
             if (event->is<sf::Event::Closed>())
                 window->close();
         }
@@ -91,7 +106,11 @@ void Display::Sfml::refresh()
         this->sectionheight = 0;
         this->cursor = 0;
         window->clear();
-        host.Draw(this);
+        view->setCenter(sf::Vector2f(window->getSize().x / 2.0f, window->getSize().y / 2.0f + this->scrolloffset));
+        window->setView(*view);
+        for (int i = 0; i < 30; i++)
+            host.Draw(this);
         window->display();
+        window->setView(window->getDefaultView());
     }
 }
