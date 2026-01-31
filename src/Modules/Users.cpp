@@ -4,13 +4,12 @@
 #include <string>
 #include <set>
 
-Users::Users() {
-}
+Users::Users()
+{}
 
 void Users::Draw(Krell::IDisplay *ui) {
     std::set<std::string> users;
     struct utmp *ut;
-    
     setutent();
     while ((ut = getutent()) != nullptr) {
         if (ut->ut_type == USER_PROCESS) {
@@ -18,19 +17,14 @@ void Users::Draw(Krell::IDisplay *ui) {
         }
     }
     endutent();
-    
     _name = "";
     for (const auto& user : users) {
-        if (!_name.empty()) {
+        if (!_name.empty())
             _name += ", ";
-        }
         _name += user;
     }
-    
-    if (_name.empty()) {
+    if (_name.empty())
         _name = "None";
-    }
-    
     ui->NewSection("Logged Users");
     ui->drawText(_name);
 }

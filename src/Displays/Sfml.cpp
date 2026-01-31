@@ -3,6 +3,8 @@
 #include "Modules/Hostname.hpp"
 #include "Modules/Kernel.hpp"
 #include "Modules/Temp.hpp"
+#include "Modules/Cpu.hpp"
+#include "Modules/Users.hpp"
 
 bool Display::Sfml::init() {
     window = new sf::RenderWindow();
@@ -77,7 +79,7 @@ bool Display::Sfml::drawText(std::string text)
 {
     sf::Text sftext(*font);
     sftext.setString(text);
-    sftext.setCharacterSize(20);
+    sftext.setCharacterSize(17);
     sftext.setFillColor(sf::Color::White);
     float width = sftext.getLocalBounds().size.x;
     sftext.setPosition({(window->getSize().x - width) / 2.0f, this->cursor - 20.0f});
@@ -91,6 +93,8 @@ void Display::Sfml::refresh()
     Hostname host;
     Kernel kernel;    
     Temp temperature;
+    Users usrs;
+    Cpu cpu;
 
     while (window->isOpen()) {
         while (auto event = window->pollEvent()) {
@@ -117,6 +121,8 @@ void Display::Sfml::refresh()
         host.Draw(this);
         kernel.Draw(this);
         temperature.Draw(this);
+        cpu.Draw(this);
+        usrs.Draw(this); 
         window->display();
         window->setView(window->getDefaultView());
     }
