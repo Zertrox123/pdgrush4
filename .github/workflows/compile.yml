@@ -14,7 +14,8 @@ jobs:
           pacman -Sy --noconfirm \
             git \
             sfml \
-            base-devel
+            base-devel \
+            clang
       - name: checkout
         uses: actions/checkout@v4
       - name: make
