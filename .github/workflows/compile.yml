@@ -45,7 +45,9 @@ jobs:
           -e 's/-lsfml-system/-lsfml-system3/g' \
           Makefile
       - name: build
-        run: make
+        run: |
+          export LD_LIBRARY_PATH=/usr/local/lib
+          make -j
   buildarch:
     name: arch
     runs-on: ubuntu-latest
