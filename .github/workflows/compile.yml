@@ -37,6 +37,13 @@ jobs:
           cmake --build build
           sudo cmake --install build
           sudo ldconfig
+      - name: fix smfml libs
+        run: |
+          sed -i \
+          -e 's/-lsfml-graphics/-lsfml-graphics3/g' \
+          -e 's/-lsfml-window/-lsfml-window3/g' \
+          -e 's/-lsfml-system/-lsfml-system3/g' \
+          Makefile
       - name: build
         run: make
   buildarch:
