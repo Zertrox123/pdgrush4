@@ -3,6 +3,7 @@
     "file": "src/main.cpp",
     "arguments": [
       "g++",
+      "-g3",
       "-std=c++20",
       "-Wall",
       "-Wextra",
@@ -20,6 +21,7 @@
     "file": "src/Displays/Ncurses.cpp",
     "arguments": [
       "g++",
+      "-g3",
       "-std=c++20",
       "-Wall",
       "-Wextra",
@@ -32,22 +34,5 @@
     ],
     "directory": "/home/poulpy/epitech/piscine/G-PDG-300-LYN-3-1-PDGRUSH4-11",
     "output": "src/Displays/Ncurses.o"
-  },
-  {
-    "file": "src/Displays/Sfml.cpp",
-    "arguments": [
-      "g++",
-      "-std=c++20",
-      "-Wall",
-      "-Wextra",
-      "-Werror",
-      "-I./src",
-      "-c",
-      "-o",
-      "src/Displays/Sfml.o",
-      "src/Displays/Sfml.cpp"
-    ],
-    "directory": "/home/poulpy/epitech/piscine/G-PDG-300-LYN-3-1-PDGRUSH4-11",
-    "output": "src/Displays/Sfml.o"
   }
 ]

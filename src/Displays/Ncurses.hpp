@@ -8,7 +8,7 @@
 namespace Display{ 
     class Ncurses: public Krell::IDisplay {
 private:
-    int getWindowSize() {
+    int getCWindowSize() {
         struct winsize w;
         ioctl(STDOUT_FILENO, TIOCGWINSZ, &w);
         return w.ws_col;
@@ -18,6 +18,8 @@ private:
     int winw = 1;
     int padding = 0;
     int staticpadding = 0;
+    int drawcall = 0;
+    int lastcolor = 0;
 
 public:
         ~Ncurses() override;
