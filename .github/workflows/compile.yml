@@ -4,19 +4,19 @@ on:
   push:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    container:
-      image: archlinux:latest
-    steps:
-      - name: pacman
-        run: |
-          pacman -Sy --noconfirm \
-            git \
-            sfml \
-            base-devel \
-            clang
-      - name: checkout
-        uses: actions/checkout@v4
-      - name: make
-        run: make
+    build-ubuntu:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - run: |
+                   sudo apt update
+                   sudo apt install -y libsfml-dev build-essential libncurses-dev
+            - run: make
+    build-arch:
+        runs-on: ubuntu-latest
+        container:
+            image: archlinux:latest
+                steps:
+                    - run: pacman -Sy --noconfirm git sfml ncurses base-devel
+                    - uses: actions/checkout@v4
+                    - run: make

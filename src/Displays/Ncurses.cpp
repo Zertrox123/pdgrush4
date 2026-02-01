@@ -35,7 +35,7 @@ void Display::Ncurses::NewSection(std::string Name) {
     WINDOW *win = newwin(winh, winw, staticpadding + padding, 0);
     wattron(win, COLOR_PAIR(1));
     box(win, 0, 0);
-    mvwprintw(win, 0, 2, Name.c_str());
+    mvwprintw(win, 0, 2, "%s", Name.c_str());
     actual_win = win;
     wrefresh(actual_win);
     wattroff(win, COLOR_PAIR(1));
@@ -55,7 +55,7 @@ bool Display::Ncurses::drawText(std::string text) {
     
     for (size_t i = 0; i < lines.size(); i++) {
         int x = winw / 2 - (lines[i].length() / 2);
-        mvwprintw(actual_win, start_y + i, x, lines[i].c_str());
+        mvwprintw(actual_win, start_y + i, x, "%s", lines[i].c_str());
     }
     
     drawcall += 1;
