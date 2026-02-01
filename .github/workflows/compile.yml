@@ -12,6 +12,6 @@ jobs:
       - name: install packages
         run: |
           sudo apt update
-          sudo apt install -y build-essential
+          sudo apt install -y libsfml-dev build-essential
       - name: make
         run: make
