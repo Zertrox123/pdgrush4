@@ -6,12 +6,16 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: archlinux:latest
     steps:
+      - name: pacman
+        run: |
+          pacman -Sy --noconfirm \
+            git \
+            sfml \
+            base-devel
       - name: checkout
         uses: actions/checkout@v4
-      - name: install packages
-        run: |
-          sudo apt update
-          sudo apt install -y libsfml-dev build-essential
       - name: make
         run: make
