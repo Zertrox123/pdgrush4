@@ -4,19 +4,56 @@ on:
   push:
 
 jobs:
-  build-ubuntu:
+  buildubuntu:
+    name: ubuntu
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - run: |
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: dep
+        run: |
           sudo apt update
-          sudo apt install -y libsfml-dev build-essential libncurses-dev
-      - run: make
-  build-arch:
+          sudo apt install -y \
+            build-essential \
+            cmake \
+            git \
+            libxrandr-dev \
+            libx11-dev \
+            libxcursor-dev \
+            libfreetype6-dev \
+            libxi-dev \
+            libudev-dev \
+            libgl1-mesa-dev \
+            libvorbis-dev \
+            libopenal-dev \
+            libflac-dev \
+            libncurses-dev
+      - name: build sfml3
+        run: |
+          git clone https://github.com/SFML/SFML.git
+          cd SFML
+          git checkout 3.x
+          cmake -S . -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build
+          sudo cmake --install build
+          sudo ldconfig
+      - name: build
+        run: make
+  buildarch:
+    name: arch
     runs-on: ubuntu-latest
     container:
       image: archlinux:latest
     steps:
-      - run: pacman -Sy --noconfirm git sfml ncurses base-devel
-      - uses: actions/checkout@v4
-      - run: make
+      - name: dep
+        run: |
+          pacman -Sy --noconfirm \
+            ncurses \
+            git \
+            sfml \
+            base-devel \
+            clang
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: build
+        run: make
