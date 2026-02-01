@@ -1,0 +1,17 @@
+name: compile test
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: install packages
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential
+      - name: make
+        run: make
