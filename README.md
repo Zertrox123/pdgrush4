@@ -1,22 +1,12 @@
 # PDG Rush 4
 
-Implémentation d'un modèle objet et de gestion de mémoire dynamique en C.
+Implémentation d'un système orienté objet et polymorphe en C pur.
 
-## Présentation
+Met en place des conteneurs génériques, une table de pointeurs de fonctions (vtable) pour le dispatch dynamique et une gestion manuelle de la mémoire.
 
-Ce projet reproduit les concepts de la programmation orientée objet (polymorphisme, encapsulation, allocation dynamique) en langage C pur.
-
-Fonctionnalités :
-- Conteneurs dynamiques polymorphes (listes, vecteurs).
-- Système de virtual method tables (VMT) pour le dispatch dynamique de méthodes.
-- Gestion stricte de l'allocation et de la libération mémoire.
-
-## Compilation et Tests
+## Build et tests
 
 ```bash
-# Compiler la bibliothèque et les tests
 make
-
-# Exécuter la suite de tests
 ./unit_tests
 ```
